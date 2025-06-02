@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Menú | El Buen Sabor{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Menú del Día</h2>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for plato in platos %}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <img src="{{ plato.imagen.url }}" class="card-img-top" alt="{{ plato.nombre }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ plato.nombre }}</h5>
+                <p class="card-text">{{ plato.descripcion }}</p>
+                <p class="fw-bold text-success">${{ plato.precio }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
