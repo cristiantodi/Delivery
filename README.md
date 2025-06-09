@@ -1,5 +1,3 @@
-## 📚 Descripción Técnica
-
 ## 🛠️ Requisitos Técnicos
 
 - Python 3.12+
