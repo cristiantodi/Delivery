@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
+    path('menu/', include('Menu.urls')),  # Vista de platos
+    path('pedido/', include('Pedido.urls')),  # Pedidos y seguimiento
+    path('user/', include('User.urls')),  # Login, home y redirecciones
     path('admin/', admin.site.urls),
 
     path('', include('AppDelivery.urls')),

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Menú | El Buen Sabor{% endblock %}
+
+{% block content %}
+<h2>Seguimiento de tu Pedido</h2>
+<p>Estado: <strong>{{ pedido.get_estado_display }}</strong></p>
+<div id="map" style="height: 300px;"></div>
+<script>
+function initMap() {
+    const coords = "{{ pedido.ubicacion_mensajero }}".split(',');
+    const ubicacion = { lat: parseFloat(coords[0]), lng: parseFloat(coords[1]) };
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 14,
+        center: ubicacion
+    });
+    new google.maps.Marker({ position: ubicacion, map: map });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMap" async defer></script>
+{% endblock %}

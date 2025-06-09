@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # My App's
     'AppDelivery',
     'Pedido',
+    'Menu',
     'User',  
 ]
 
