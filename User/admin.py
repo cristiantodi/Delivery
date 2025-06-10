@@ -1,24 +1,35 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Usuario
+from .models import Usuario, Cargo
 
-class UsuarioAdmin(UserAdmin):
-    model = Usuario
-    list_display = ('username', 'email','is_staff', 'is_active')
-    # list_filter = ('tipo', 'is_staff')
+@admin.register(Cargo)
+class CargoAdmin(admin.ModelAdmin):
+    list_display = ('nombre',)
+
+@admin.register(Usuario)
+class UsuarioAdmin(UserAdmin):    
+    list_display = ('username', 'email', 'mostrar_cargos', 'is_staff')
+
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        ('Información personal', {'fields': ('first_name', 'last_name', 'email', 'telefono', 'tipo')}),
-        ('Permisos', {'fields': ('is_staff', 'is_superuser', 'is_active', 'groups', 'user_permissions')}),
+        ('Información personal', {'fields': ('first_name', 'last_name', 'email', 'telefono', 'cargo')}),
+        ('Permisos', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Fechas importantes', {'fields': ('last_login', 'date_joined')}),
     )
+
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'telefono', 'tipo', 'password1', 'password2', 'is_staff', 'is_active')}
+            'fields': ('username', 'email', 'telefono', 'cargo', 'password1', 'password2', 'is_staff', 'is_active')}
         ),
     )
-    search_fields = ('username', 'email')
-    ordering = ('username',)
 
-admin.site.register(Usuario, UsuarioAdmin)
+    def mostrar_cargos(self, obj):
+        return ", ".join([c.nombre for c in obj.cargo.all()])
+    mostrar_cargos.short_description = 'Cargos'
+    
+
+    
+# admin.site.register(Usuario, UsuarioAdmin)
+# admin.site.register(Cargo, CargoAdmin)
+

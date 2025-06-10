@@ -1,12 +1,16 @@
-{% extends 'base.html' %}
-{% block title %}Login{% endblock %}
-
+{% extends "base.html" %}
 {% block content %}
+
 <h2>Iniciar sesión</h2>
+
 <form method="POST">
+
     {% csrf_token %}
-    <input type="text" name="username" class="form-control mb-2" placeholder="Usuario">
-    <input type="password" name="password" class="form-control mb-2" placeholder="Contraseña">
-    <button type="submit" class="btn btn-primary">Ingresar</button>
+
+    <input type="text" name="username" placeholder="Usuario" class="form-control mb-2">
+    <input type="password" name="password" placeholder="Contraseña" class="form-control mb-2">
+    <button type="submit" class="btn btn-primary">Entrar</button>
+    
 </form>
+<a class="nav-link" href="{% url 'registro_cliente' %}">Registrar Usuario</a>
 {% endblock %}
